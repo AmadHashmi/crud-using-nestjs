@@ -37,10 +37,17 @@ export class UsersService {
     return this.users[userIndex];
   }
 
-  delete(id: number): boolean {
+  delete(id: number): { success: boolean; message?: string } {
     const initialLength = this.users.length;
     this.users = this.users.filter((u) => u.id !== id);
-    return this.users.length !== initialLength;
+
+    return {
+      success: this.users.length !== initialLength,
+      message:
+        this.users.length !== initialLength
+          ? 'User deleted successfully'
+          : 'User not found',
+    };
   }
 
   private generateId(): number {
