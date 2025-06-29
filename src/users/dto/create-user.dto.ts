@@ -8,21 +8,21 @@ import {
 } from 'class-validator';
 import { PREDEFINED_GROUPS, PREDEFINED_ROLES } from '../user.model';
 
-export class UserDto {
+export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(100)
-  name?: string;
+  name: string;
 
   @IsArray()
   @ArrayMinSize(1)
   @ArrayContains(PREDEFINED_ROLES, { each: true })
-  roles?: string[];
+  roles: string[];
 
   @IsArray()
   @ArrayMinSize(1)
   @ArrayContains(PREDEFINED_GROUPS, { each: true })
-  groups?: string[];
+  groups: string[];
 }
 
 export class UpdateUserDto {
