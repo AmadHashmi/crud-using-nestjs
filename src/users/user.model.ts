@@ -13,7 +13,13 @@ export interface Role {
 
 export const PREDEFINED_GROUPS = ['GROUP_1', 'GROUP_2'];
 export const PREDEFINED_ROLES = ['ADMIN', 'PERSONAL', 'VIEWER'];
-export const PREDEFINED_PERMISSIONS = ['CREATE', 'VIEW', 'EDIT', 'DELETE'];
+export const PREDEFINED_PERMISSIONS = [
+  'CREATE',
+  'VIEW',
+  'EDIT',
+  'DELETE',
+  'VIEW_MANAGED_USERS',
+];
 
 export const users: User[] = [
   {
@@ -53,7 +59,7 @@ export const ROLES: Role[] = [
   {
     name: 'Admin',
     code: 'ADMIN',
-    permissions: ['CREATE', 'VIEW', 'EDIT', 'DELETE'],
+    permissions: ['CREATE', 'VIEW', 'EDIT', 'DELETE', 'VIEW_MANAGED_USERS'],
   },
   { name: 'Personal', code: 'PERSONAL', permissions: [] },
   { name: 'Viewer', code: 'VIEWER', permissions: ['VIEW'] },

@@ -54,7 +54,7 @@ export class UsersController {
 
   @Get('managed/:id')
   @UseGuards(PermissionGuard)
-  @SetMetadata('permission', 'VIEW')
+  @SetMetadata('permission', 'VIEW_MANAGED_USERS')
   findManagedUsers(@Param('id') id: string): User[] {
     return this.usersService.findManagedUsers(parseInt(id));
   }
