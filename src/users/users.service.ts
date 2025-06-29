@@ -16,6 +16,20 @@ export class UsersService {
     return newUser;
   }
 
+  update(id: number, updateData: Partial<Omit<User, 'id'>>): User | null {
+    const userIndex = this.users.findIndex((u) => u.id === id);
+    if (userIndex === -1) return null;
+
+    this.users[userIndex] = { ...this.users[userIndex], ...updateData };
+    return this.users[userIndex];
+  }
+
+  delete(id: number): boolean {
+    const initialLength = this.users.length;
+    this.users = this.users.filter((u) => u.id !== id);
+    return this.users.length !== initialLength;
+  }
+
   private generateId(): number {
     return this.users.length > 0
       ? Math.max(...this.users.map((u) => u.id)) + 1
