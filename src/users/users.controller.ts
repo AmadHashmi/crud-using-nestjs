@@ -15,7 +15,7 @@ import {
 import { UsersService } from './users.service';
 import { User } from './user.model';
 import { CreateUserDto, UpdateUserDto } from './dto/create-user.dto';
-import { PermissionGuard } from 'src/auth/permission.guard';
+import { PermissionGuard } from '../auth/permission.guard';
 
 @Controller('users')
 export class UsersController {
