@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { User, users } from './user.model';
 import { CreateUserDto } from './dto/create-user.dto';
 
@@ -25,7 +29,9 @@ export class UsersService {
 
   update(id: number, updateData: Partial<Omit<User, 'id'>>): User | null {
     const userIndex = this.users.findIndex((u) => u.id === id);
-    if (userIndex === -1) return null;
+    if (userIndex === -1) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
 
     this.users[userIndex] = { ...this.users[userIndex], ...updateData };
     return this.users[userIndex];
@@ -44,7 +50,11 @@ export class UsersService {
   }
 
   findOne(id: number): User | null {
-    return this.users.find((u) => u.id === id) || null;
+    const user = this.users.find((u) => u.id === id);
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+    return user;
   }
 
   findManagedUsers(managerId: number): User[] {
