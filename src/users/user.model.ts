@@ -5,8 +5,15 @@ export interface User {
   groups: string[];
 }
 
+export interface Role {
+  name: string;
+  code: string;
+  permissions: string[];
+}
+
 export const PREDEFINED_GROUPS = ['GROUP_1', 'GROUP_2'];
 export const PREDEFINED_ROLES = ['ADMIN', 'PERSONAL', 'VIEWER'];
+export const PREDEFINED_PERMISSIONS = ['CREATE', 'VIEW', 'EDIT', 'DELETE'];
 
 export const users: User[] = [
   {
@@ -40,4 +47,14 @@ export const users: User[] = [
     roles: ['VIEWER', 'PERSONAL'],
     groups: ['GROUP_1'],
   },
+];
+
+export const ROLES: Role[] = [
+  {
+    name: 'Admin',
+    code: 'ADMIN',
+    permissions: ['CREATE', 'VIEW', 'EDIT', 'DELETE'],
+  },
+  { name: 'Personal', code: 'PERSONAL', permissions: [] },
+  { name: 'Viewer', code: 'VIEWER', permissions: ['VIEW'] },
 ];

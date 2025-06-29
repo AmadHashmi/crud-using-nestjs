@@ -1,7 +1,7 @@
 import {
-  ArrayContains,
   ArrayMinSize,
   IsArray,
+  IsIn,
   IsNotEmpty,
   IsString,
   MaxLength,
@@ -16,12 +16,12 @@ export class CreateUserDto {
 
   @IsArray()
   @ArrayMinSize(1)
-  @ArrayContains(PREDEFINED_ROLES, { each: true })
+  @IsIn(PREDEFINED_ROLES, { each: true })
   roles: string[];
 
   @IsArray()
   @ArrayMinSize(1)
-  @ArrayContains(PREDEFINED_GROUPS, { each: true })
+  @IsIn(PREDEFINED_GROUPS, { each: true })
   groups: string[];
 }
 
@@ -30,11 +30,11 @@ export class UpdateUserDto {
   @MaxLength(100)
   name?: string;
 
-  @IsString()
-  @ArrayContains(PREDEFINED_ROLES, { each: true })
+  @IsArray()
+  @IsIn(PREDEFINED_ROLES, { each: true })
   roles?: string[];
 
   @IsArray()
-  @ArrayContains(PREDEFINED_GROUPS, { each: true })
+  @IsIn(PREDEFINED_GROUPS, { each: true })
   groups?: string[];
 }
