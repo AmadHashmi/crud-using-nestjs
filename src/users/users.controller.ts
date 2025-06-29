@@ -36,4 +36,9 @@ export class UsersController {
   delete(@Param('id') id: string) {
     return this.usersService.delete(parseInt(id));
   }
+
+  @Get('managed/:id')
+  findManagedUsers(@Param('id') id: string): User[] {
+    return this.usersService.findManagedUsers(parseInt(id));
+  }
 }

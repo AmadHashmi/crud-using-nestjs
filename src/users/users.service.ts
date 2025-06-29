@@ -35,4 +35,19 @@ export class UsersService {
       ? Math.max(...this.users.map((u) => u.id)) + 1
       : 1;
   }
+
+  findOne(id: number): User | null {
+    return this.users.find((u) => u.id === id) || null;
+  }
+
+  findManagedUsers(managerId: number): User[] {
+    const manager = this.findOne(managerId);
+    if (!manager || !manager.roles.includes('ADMIN')) return [];
+
+    return this.users.filter(
+      (user) =>
+        user.groups.some((group) => manager.groups.includes(group)) &&
+        user.id !== managerId,
+    );
+  }
 }
