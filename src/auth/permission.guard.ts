@@ -1,6 +1,7 @@
 import {
   CanActivate,
   ExecutionContext,
+  //   ForbiddenException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -9,13 +10,6 @@ import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { ROLES } from 'src/users/user.model';
 import { UsersService } from 'src/users/users.service';
-
-// interface PermissionRequest extends Request {
-//   headers: {
-//     authorization?: string;
-//     [key: string]: any;
-//   };
-// }
 
 @Injectable()
 export class PermissionGuard implements CanActivate {
@@ -59,6 +53,16 @@ export class PermissionGuard implements CanActivate {
         'Not allowed to perform action due to insufficient permissions',
       );
     }
+
+    // if (context.getHandler().name === 'findManagedUsers') {
+    //   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+    //   const requestId = parseInt(context.switchToHttp().getRequest().params.id);
+    //   if (parseInt(userId) !== requestId) {
+    //     throw new ForbiddenException(
+    //       'You can only view your own managed users',
+    //     );
+    //   }
+    // }
 
     return true;
   }
