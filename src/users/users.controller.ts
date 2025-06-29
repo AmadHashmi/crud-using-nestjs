@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   SetMetadata,
@@ -39,23 +40,23 @@ export class UsersController {
   @SetMetadata('permission', 'EDIT')
   @UsePipes(new ValidationPipe({ transform: true }))
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateDto: UpdateUserDto,
   ): User | null {
-    return this.usersService.update(parseInt(id), updateDto);
+    return this.usersService.update(id, updateDto);
   }
 
   @Delete(':id')
   @UseGuards(PermissionGuard)
   @SetMetadata('permission', 'DELETE')
-  delete(@Param('id') id: string) {
-    return this.usersService.delete(parseInt(id));
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.usersService.delete(id);
   }
 
   @Get('managed/:id')
   @UseGuards(PermissionGuard)
   @SetMetadata('permission', 'VIEW_MANAGED_USERS')
-  findManagedUsers(@Param('id') id: string): User[] {
-    return this.usersService.findManagedUsers(parseInt(id));
+  findManagedUsers(@Param('id', ParseIntPipe) id: number): User[] {
+    return this.usersService.findManagedUsers(id);
   }
 }
